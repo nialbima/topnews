@@ -14,6 +14,10 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_27_124657) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  # Custom types defined in this database.
+  # Note that some types may not work with other database engines. Be careful if changing database.
+  create_enum "story_source", ["hacker_news"]
+
   create_table "flags", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "story_id", null: false
@@ -26,11 +30,12 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_27_124657) do
   create_table "stories", force: :cascade do |t|
     t.string "title"
     t.string "url"
-    t.string "source"
+    t.enum "source", default: "hacker_news", null: false, enum_type: "story_source"
     t.integer "source_id"
     t.boolean "is_top_story", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["source"], name: "index_stories_on_source"
   end
 
   create_table "users", force: :cascade do |t|
