@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
-  root to: 'pages#home'
+
+  resource :stories
+
+  root to: "stories#index"
 end
