@@ -1,7 +1,6 @@
 require "rails_helper"
 
 RSpec.describe Story, type: :model do
-
   describe "validations" do
     it "should validate presence of title, url, source, and source_id" do
       story = build :story

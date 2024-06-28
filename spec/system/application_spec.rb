@@ -20,6 +20,5 @@ RSpec.describe "Application", type: :system do
 
     visit root_path
     expect(page).to have_current_path(new_user_session_path)
-
   end
 end

@@ -4,7 +4,7 @@ class Story < ApplicationRecord
 
   ## NOTE: Baking this in from the start allows for us to easily expand to other sources in the future, without adding
   ## much complexity.
-  enum source: { hacker_news: "hacker_news" }
+  enum source: {hacker_news: "hacker_news"}
 
   validates :title, :url, :source, :source_id, presence: true
 

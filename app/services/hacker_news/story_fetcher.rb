@@ -1,6 +1,5 @@
 module HackerNews
   class StoryFetcher
-
     def self.fetch_top_story_ids
       new.fetch_top_story_ids
     end

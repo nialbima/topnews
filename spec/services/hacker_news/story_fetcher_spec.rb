@@ -19,16 +19,15 @@ RSpec.describe HackerNews::StoryFetcher do
 
         ## NOTE: I edited the VCR cassette by hand to avoid including somebody's username in my commit.
         expect(story).to include(
-          { "by"=>"a_user_on_hackernews",
-            "descendants"=>29,
-            "id"=>40820063,
-            "kids"=>[40821387, 40820753, 40820741, 40821179, 40821401, 40821064, 40820567, 40820571],
-            "score"=>73,
-            "time"=>1719578482,
-            "title"=>"New ways to catch gravitational waves",
-            "type"=>"story",
-            "url"=>"https://www.nature.com/articles/d41586-024-02003-6"
-          }
+          {"by" => "a_user_on_hackernews",
+           "descendants" => 29,
+           "id" => 40820063,
+           "kids" => [40821387, 40820753, 40820741, 40821179, 40821401, 40821064, 40820567, 40820571],
+           "score" => 73,
+           "time" => 1719578482,
+           "title" => "New ways to catch gravitational waves",
+           "type" => "story",
+           "url" => "https://www.nature.com/articles/d41586-024-02003-6"}
         )
       end
     end

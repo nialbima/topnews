@@ -1,7 +1,7 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe HackerNews::TopStory, type: :model do
-  describe 'attributes' do
+  describe "#initialize" do
     it "initializes a story with cast attributes from a JSON payload" do
       VCR.use_cassette("hacker_news_story", record: :once) do
         id_in_cassette = 40820063

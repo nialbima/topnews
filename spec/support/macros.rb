@@ -5,7 +5,6 @@ module Macros
 
   module_function :load_all
 
-
   def load_system_macros(rspec_config_object)
     rspec_config_object.include Macros::System, type: :system
   end
