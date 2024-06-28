@@ -17,7 +17,7 @@ RSpec.describe HackerNews::StoryFetcher do
       VCR.use_cassette("hacker_news_story", record: :once) do
         story = described_class.fetch_story_data(story_id)
 
-        ## I edited the VCR cassette by hand to avoid including somebody's username in my commit.
+        ## NOTE: I edited the VCR cassette by hand to avoid including somebody's username in my commit.
         expect(story).to include(
           { "by"=>"a_user_on_hackernews",
             "descendants"=>29,

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe HackerNews::Story, type: :model do
+RSpec.describe HackerNews::TopStory, type: :model do
   describe 'attributes' do
     it "initializes a story with cast attributes from a JSON payload" do
       VCR.use_cassette("hacker_news_story", record: :once) do
@@ -19,6 +19,22 @@ RSpec.describe HackerNews::Story, type: :model do
           descendants: 29,
           kids: [40821387, 40820753, 40820741, 40821179, 40821401, 40821064, 40820567, 40820571]
         )
+      end
+    end
+  end
+
+  describe "#to_story_record" do
+    it "converts a HackerNews::TopStory object to a Story object" do
+      VCR.use_cassette("hacker_news_story", record: :once) do
+        id_in_cassette = 40820063
+        payload = HackerNews::StoryFetcher.new.fetch_story_data(id_in_cassette)
+
+        allow(Story).to receive(:from_hacker_news).and_call_original
+
+        top_story = described_class.new(payload)
+        top_story.to_story_record
+
+        expect(Story).to have_received(:from_hacker_news).with(top_story_object: top_story, is_top_story: true)
       end
     end
   end
