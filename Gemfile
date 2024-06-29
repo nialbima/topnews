@@ -78,3 +78,5 @@ group :development do
   gem "web-console"
   gem "standard"
 end
+
+gem "whenever", "~> 1.0"

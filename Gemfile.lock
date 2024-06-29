@@ -83,6 +83,7 @@ GEM
       rack-test (>= 0.6.3)
       regexp_parser (>= 1.5, < 3.0)
       xpath (~> 3.2)
+    chronic (0.10.2)
     concurrent-ruby (1.1.10)
     connection_pool (2.4.1)
     crack (1.0.0)
@@ -361,6 +362,8 @@ GEM
     websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
+    whenever (1.0.0)
+      chronic (>= 0.6.3)
     xpath (3.2.0)
       nokogiri (~> 1.8)
     zeitwerk (2.6.0)
@@ -399,6 +402,7 @@ DEPENDENCIES
   vcr
   web-console
   webmock
+  whenever (~> 1.0)
 
 RUBY VERSION
    ruby 3.1.2p20
