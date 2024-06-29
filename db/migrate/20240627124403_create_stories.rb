@@ -7,11 +7,14 @@ class CreateStories < ActiveRecord::Migration[7.0]
       with_options null: false do
         t.string :title
         t.string :url
-        t.enum :source, enum_type: :story_source, default: "hacker_news", index: true, null: false
+        t.enum :source, enum_type: :story_source, default: "hacker_news", null: false
         t.integer :source_id
         t.boolean :is_top_story, default: false
       end
+
       t.timestamps
     end
+
+    add_index :stories, [:source, :source_id], unique: true
   end
 end

@@ -9,6 +9,11 @@ RSpec.describe Story, type: :model do
         expect(story).to validate_presence_of(attr)
       end
     end
+
+    it "should validate uniqueness of source_id scoped to source" do
+      story = create :story
+      expect(story).to validate_uniqueness_of(:source_id).scoped_to(:source)
+    end
   end
 
   describe "associations" do

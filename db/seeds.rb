@@ -1,3 +1,5 @@
+puts "Seeding DB..."
+
 User.find_or_initialize_by(email: "me@me.com").update({
   first_name: "It",
   last_name: "Me",

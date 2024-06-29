@@ -3,6 +3,8 @@ module HackerNews
     include ActiveModel::Model
     include ActiveModel::Attributes
 
+    attribute :rank, :integer
+
     attribute :id, :integer
     attribute :score, :integer
     attribute :descendants, :integer
@@ -14,6 +16,7 @@ module HackerNews
     attribute :time, :epoch_time
     # You can't use array: true without access to the Postgres db. A simple cast solves it.
     attribute :kids, :array_of_integers
+    attribute :text, :string
 
     def to_story_record
       Story.from_hacker_news(top_story_object: self, is_top_story: true)
