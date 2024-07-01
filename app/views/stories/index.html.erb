@@ -1,1 +1,14 @@
-<h1>Welcome to Top News</h1>
+<table>
+  <tr>
+    <th>Url</th>
+    <th>Flagged?</th>
+    <th></th>
+  </tr>
+
+  <%=
+    render partial: "stories/table/story_row",
+      collection: @top_stories,
+      as: :story
+  %>
+
+<table>

@@ -10,6 +10,7 @@ class Story < ApplicationRecord
   enum source: {hacker_news: "hacker_news"}
 
   scope :top_stories_with_rank, -> { where(is_top_story: true).order(:rank) }
+  scope :flagged_stories, -> { where(flag_count: (0...)).order(flag_count: :desc) }
 
   def self.ranked_top_story_ids
     top_stories_with_rank.pluck(:rank, :source_id)
@@ -23,5 +24,9 @@ class Story < ApplicationRecord
       rank: top_story_object.rank,
       is_top_story: is_top_story,
     )
+  end
+
+  def flagged?
+    flags_count > 0
   end
 end

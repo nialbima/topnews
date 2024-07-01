@@ -1,0 +1,9 @@
+<tr>
+  <td> <%= link_to story.title, story.url, target: "_blank" %> </td>
+  <td> <%= story.flagged? ? "Yes!" : "NOPE" %> </td>
+  <td>
+    <%=
+      button_to "Click to toggle flag", flag_path, params: {story_id: story.id}
+    %>
+  </td>
+</tr>

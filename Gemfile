@@ -15,6 +15,8 @@ gem "sidekiq"
 ## I see no reason to alter the default JSON parser. Oj is more performant and invisible.
 gem "jbuilder"
 gem "oj"
+gem "kaminari"
+# gem "hair_trigger"
 
 gem "faraday"
 gem "typhoeus"

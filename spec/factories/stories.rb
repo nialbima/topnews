@@ -4,8 +4,6 @@ FactoryBot.define do
     url { "www.wow.cool" }
     source_id { 87654321 }
     rank { nil }
-    hacker_news
-
 
     trait :randomized do
       source_id { rand(1e7...1e8).to_i }
