@@ -24,7 +24,7 @@ module HackerNews
 
     def fetch_current_ranking
       Rails.cache.read(HackerNews::TOP_STORIES_CACHE_KEY) ||
-      Story.hacker_news.ranked_top_story_ids
+        Story.hacker_news.ranked_top_story_ids
     end
   end
 end

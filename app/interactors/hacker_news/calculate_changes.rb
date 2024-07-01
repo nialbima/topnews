@@ -12,7 +12,6 @@ class HackerNews::CalculateChanges
     context.static_top_set = changeset.static_top_set
   end
 
-
   def calculated_changesets
     calculator.calculate_changesets(
       current_ranking: current_ranking, new_ranking: new_ranking

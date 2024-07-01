@@ -40,8 +40,8 @@ RSpec.describe HackerNews::TopStoryRankingBuilder do
     it "queries the DB for relevant top stories when there's nothing in the cache" do
       current_ranking = [[0, 33], [1, 66], [2, 99], [3, 132], [4, 155], [5, 188]]
       current_ranking.each do |(rank, id)|
-          create :top_story, rank: rank, source_id: id
-        end
+        create :top_story, rank: rank, source_id: id
+      end
 
       allow(Story).to receive(:ranked_top_story_ids).and_call_original
 

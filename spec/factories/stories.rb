@@ -4,8 +4,6 @@ FactoryBot.define do
     url { "www.wow.cool" }
     source_id { 87654321 }
     rank { nil }
-    hacker_news
-
 
     trait :randomized do
       source_id { rand(1e7...1e8).to_i }
@@ -14,7 +12,7 @@ FactoryBot.define do
       sequence(:rank) { |n| n }
     end
 
-    trait :is_top_story  do
+    trait :is_top_story do
       is_top_story { true }
     end
   end

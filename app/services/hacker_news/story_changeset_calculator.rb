@@ -50,8 +50,6 @@ module HackerNews
               break
             end
           end
-
-          remaining_current_rankings
         end
       end
     end

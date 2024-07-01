@@ -8,18 +8,7 @@
     <%= javascript_importmap_tags %>
   </head>
   <body>
-    <%=
-      if user_signed_in?
-        button_to "Log Out", destroy_user_session_path, method: :delete, form: { 'data-turbo' => "false" }
-      end
-    %>
-
-    <p class="notice">
-      <%= notice %>
-    </p>
-    <p class="alert">
-      <%= alert %>
-    </p>
+    <%= render partial: "shared/nav_header" %>
     <%= yield %>
   </body>
 </html>

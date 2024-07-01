@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_06_28_204455) do
+ActiveRecord::Schema[7.0].define(version: 2024_07_01_225942) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -36,7 +36,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_28_204455) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "rank"
-    t.index ["source"], name: "index_stories_on_source"
+    t.integer "flags_count", default: 0, null: false
+    t.index ["source", "source_id"], name: "index_stories_on_source_and_source_id", unique: true
   end
 
   create_table "users", force: :cascade do |t|
@@ -60,4 +61,29 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_28_204455) do
 
   add_foreign_key "flags", "stories"
   add_foreign_key "flags", "users"
+  create_trigger("flags_after_insert_row_tr", :generated => true, :compatibility => 1).
+      on("flags").
+      after(:insert) do
+    <<-SQL_ACTIONS
+    UPDATE stories
+    SET flags_count = (
+      SELECT COUNT(1) FROM flags WHERE story_id = NEW.story_id
+    ) WHERE id = NEW.story_id;
+    SQL_ACTIONS
+  end
+
+  create_trigger("flags_before_delete_row_tr", :generated => true, :compatibility => 1).
+      on("flags").
+      before(:delete) do
+    <<-SQL_ACTIONS
+    UPDATE stories
+    SET flags_count = (
+      SELECT GREATEST(
+        (SELECT COUNT(id) FROM flags WHERE story_id = OLD.story_id) -1,
+        0
+      )
+    ) WHERE id = OLD.story_id;
+    SQL_ACTIONS
+  end
+
 end

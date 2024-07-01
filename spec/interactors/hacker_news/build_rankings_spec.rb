@@ -1,8 +1,8 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe HackerNews::BuildRankings, type: :interactor do
-  describe '.call' do
-    it 'successfully assigns current_ranking and new_ranking' do
+  describe ".call" do
+    it "successfully assigns current_ranking and new_ranking" do
       current_ranking = [[0, 33], [1, 66], [2, 99], [3, 132], [4, 155], [5, 188]]
       current_ranking.each { |(rank, id)| create :top_story, rank: rank, source_id: id }
 
