@@ -3,8 +3,7 @@ require "rails_helper"
 RSpec.describe Story, type: :model do
   describe "validations" do
     it "should validate presence of title, url, source, and source_id" do
-      story = build :story
-
+      story = create :story
       [:title, :url, :source, :source_id].each do |attr|
         expect(story).to validate_presence_of(attr)
       end
