@@ -1,9 +1,25 @@
-<tr>
-  <td> <%= link_to story.title, story.url, target: "_blank" %> </td>
-  <td> <%= story.flagged? ? "Yes!" : "NOPE" %> </td>
+<tr id="story_<%= story.source_id %>" is="turbo-frame">
+  <td><%= link_to story.title, story.url, target: "_blank" %> </td>
+
+  <td><%= link_to "On HN", story.hacker_news_link, target: "_blank" %></td>
   <td>
     <%=
-      button_to "Click to toggle flag", flag_path, params: {story_id: story.id}
+        button_to flag_path, method: :post, params: {
+          stream_name: stream_name,
+          story_id: story.id
+        } do
+          if story.flagged_by_user?(current_user)
+            "You flagged me, click me to remove your flag"
+          elsif story.flagged?
+            "This has been flagged, click to add a flag"
+          else
+            "I'm not flagged, click to flag me"
+          end
+        end
     %>
+  </td>
+  <td>
+    <%# This ABSOLUTELY belongs in a ViewComponent or a Presenter. %>
+    <%= story.flagger_names(current_user) %>
   </td>
 </tr>

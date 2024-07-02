@@ -1,22 +1,28 @@
-class FlagsController
+class FlagsController < ApplicationController
   def toggle
-    @flag = Flag.new(flag_params, user: current_user)
+    story = Story.includes(:flags, :flagging_users).find(params["story_id"])
+    flag = story.flags.find_or_initialize_by(user: current_user)
 
-    if @flag.save
-      redirect_to flagged_stories_path
+    if flag.persisted?
+      flag.destroy
+    else
+      flag.save
     end
-  end
 
-  def delete
-    @flag = Flag.find(params[:id])
-    @flag.destroy
-    # TODO: this isn't the correct target
-    redirect_to flagged_stories_path
-  end
+    respond_to do |format|
+      format.turbo_stream do
+        Turbo::StreamsChannel.broadcast_refresh_to(params["stream_name"])
 
-  private
-
-  def flag_params
-    params.require(:flag).permit(:story_id).merge(user: current_user)
+        render turbo_stream: turbo_stream.replace(
+          "story_#{story.source_id}",
+          partial: "stories/table/story_row",
+          locals: {
+            story: story.reload,
+            current_user: current_user,
+            stream_name: params["stream_name"]
+          }
+        )
+      end
+    end
   end
 end

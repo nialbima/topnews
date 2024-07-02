@@ -10,7 +10,7 @@ class Story < ApplicationRecord
   enum source: {hacker_news: "hacker_news"}
 
   scope :top_stories_with_rank, -> { where(is_top_story: true).order(:rank) }
-  scope :flagged_stories, -> { where(flag_count: (0...)).order(flag_count: :desc) }
+  scope :flagged_stories, -> { where(flags_count: (0...)).order(flags_count: :desc) }
 
   def self.ranked_top_story_ids
     top_stories_with_rank.pluck(:rank, :source_id)
@@ -26,7 +26,23 @@ class Story < ApplicationRecord
     )
   end
 
+
+  def flagged_by_user?(user)
+    flagging_users.include?(user)
+  end
+
   def flagged?
     flags_count > 0
   end
+
+  def hacker_news_link
+    "news.ycombinator.com/item?id=#{source_id}"
+  end
+
+  def flagger_names(current_user)
+    base_message = current_user.in?(flagging_users) ? 'You' : nil
+    other_flaggers = flagging_users.where.not(id: current_user.id).pluck(:first_name)
+    [base_message, other_flaggers].flatten.compact.join(', ')
+  end
+
 end

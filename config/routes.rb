@@ -1,6 +1,8 @@
-Rails.application.routes.draw do
-  devise_for :users
+require 'sidekiq/web'
 
+Rails.application.routes.draw do
+  mount Sidekiq::Web => "/sidekiq"
+  devise_for :users
 
   resources :stories, only: [:index]
   resources :flagged_stories, only: [:index]

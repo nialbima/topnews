@@ -1,4 +1,4 @@
-<%= turbo_stream_from "top_stories" %>
+<%= turbo_stream_from "flagged_stories" %>
 <table>
   <thead>
     <tr>
@@ -12,9 +12,9 @@
   <tbody id="top_stories" is="turbo-frame">
     <%=
       render partial: "stories/table/story_row",
-        collection: @top_stories,
+        collection: @flagged_stories,
         as: :story,
-        locals: { current_user: current_user, stream_name: "top_stories" }
+        locals: { current_user: current_user, stream_name: "flagged_stories" }
     %>
   </tbody>
 <table>

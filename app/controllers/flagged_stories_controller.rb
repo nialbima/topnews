@@ -7,5 +7,4 @@ class FlaggedStoriesController < ApplicationController
   def flagged_stories
     Story.flagged_stories.page(params[:page] || 1).per(params[:per] || 25)
   end
-
 end

@@ -16,7 +16,7 @@ gem "sidekiq"
 gem "jbuilder"
 gem "oj"
 gem "kaminari"
-# gem "hair_trigger"
+gem "hairtrigger"
 
 gem "faraday"
 gem "typhoeus"
