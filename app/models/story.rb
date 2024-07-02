@@ -10,7 +10,7 @@ class Story < ApplicationRecord
   enum source: {hacker_news: "hacker_news"}
 
   scope :top_stories_with_rank, -> { where(is_top_story: true).order(:rank) }
-  scope :flagged_stories, -> { where(flags_count: (0...)).order(flags_count: :desc) }
+  scope :flagged_stories, -> { where(flags_count: (1...)).order(flags_count: :desc) }
 
   def self.ranked_top_story_ids
     top_stories_with_rank.pluck(:rank, :source_id)
@@ -22,10 +22,9 @@ class Story < ApplicationRecord
       url: top_story_object.url,
       source_id: top_story_object.id,
       rank: top_story_object.rank,
-      is_top_story: is_top_story,
+      is_top_story: is_top_story
     )
   end
-
 
   def flagged_by_user?(user)
     flagging_users.include?(user)
@@ -40,9 +39,8 @@ class Story < ApplicationRecord
   end
 
   def flagger_names(current_user)
-    base_message = current_user.in?(flagging_users) ? 'You' : nil
+    base_message = current_user.in?(flagging_users) ? "You" : nil
     other_flaggers = flagging_users.where.not(id: current_user.id).pluck(:first_name)
-    [base_message, other_flaggers].flatten.compact.join(', ')
+    [base_message, other_flaggers].flatten.compact.join(", ")
   end
-
 end

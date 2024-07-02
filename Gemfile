@@ -11,6 +11,7 @@ gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem "redis", ">= 4.0.1"
 gem "kredis"
 gem "sidekiq"
+gem "dotenv"
 
 ## I see no reason to alter the default JSON parser. Oj is more performant and invisible.
 gem "jbuilder"

@@ -1,5 +1,4 @@
 class FlaggedStoriesController < ApplicationController
-
   def index
     @flagged_stories = flagged_stories
   end

@@ -1,7 +1,7 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe HackerNews::ProcessCalculatedChangesets, type: :interactor do
-  describe '.call' do
+  describe ".call" do
     it "schedules processes all indicated stories" do
       new_top_set = [[1, 254], [4, 221]]
       moved_top_set = [[2, 30], [5, 512]]
@@ -21,7 +21,6 @@ RSpec.describe HackerNews::ProcessCalculatedChangesets, type: :interactor do
     end
 
     it "doesn't do anything if no stories are indicated" do
-
       allow(HackerNews::IngestStoryJob).to receive(:perform_bulk).and_return(true)
       allow(HackerNews::UpdateStoryJob).to receive(:perform_bulk).and_return(true)
       allow(HackerNews::DemoteStoriesJob).to receive(:perform_async).and_return(true)

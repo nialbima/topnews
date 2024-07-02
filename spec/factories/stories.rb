@@ -12,7 +12,7 @@ FactoryBot.define do
       sequence(:rank) { |n| n }
     end
 
-    trait :is_top_story  do
+    trait :is_top_story do
       is_top_story { true }
     end
   end

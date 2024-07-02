@@ -4,9 +4,9 @@
 
 class CreateTriggersFlagsInsertOrFlagsDelete < ActiveRecord::Migration[7.0]
   def up
-    create_trigger("flags_after_insert_row_tr", :generated => true, :compatibility => 1).
-        on("flags").
-        after(:insert) do
+    create_trigger("flags_after_insert_row_tr", generated: true, compatibility: 1)
+      .on("flags")
+      .after(:insert) do
       <<-SQL_ACTIONS
     UPDATE stories
     SET flags_count = (
@@ -15,9 +15,9 @@ class CreateTriggersFlagsInsertOrFlagsDelete < ActiveRecord::Migration[7.0]
       SQL_ACTIONS
     end
 
-    create_trigger("flags_before_delete_row_tr", :generated => true, :compatibility => 1).
-        on("flags").
-        before(:delete) do
+    create_trigger("flags_before_delete_row_tr", generated: true, compatibility: 1)
+      .on("flags")
+      .before(:delete) do
       <<-SQL_ACTIONS
     UPDATE stories
     SET flags_count = (
@@ -31,8 +31,8 @@ class CreateTriggersFlagsInsertOrFlagsDelete < ActiveRecord::Migration[7.0]
   end
 
   def down
-    drop_trigger("flags_after_insert_row_tr", "flags", :generated => true)
+    drop_trigger("flags_after_insert_row_tr", "flags", generated: true)
 
-    drop_trigger("flags_before_delete_row_tr", "flags", :generated => true)
+    drop_trigger("flags_before_delete_row_tr", "flags", generated: true)
   end
 end

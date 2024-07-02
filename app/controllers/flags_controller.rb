@@ -13,6 +13,7 @@ class FlagsController < ApplicationController
       format.turbo_stream do
         Turbo::StreamsChannel.broadcast_refresh_to(params["stream_name"])
 
+        # The UI for flagged_stories could use some work, but this is a good start.
         render turbo_stream: turbo_stream.replace(
           "story_#{story.source_id}",
           partial: "stories/table/story_row",
