@@ -1,0 +1,20 @@
+<%= turbo_stream_from "flagged_stories" %>
+<table>
+  <thead>
+    <tr>
+      <th>Url</th>
+      <th>HN Discussion</th>
+      <th>Flag?</th>
+      <th>Flagged By</th>
+    </tr>
+  </thead>
+
+  <tbody id="top_stories" is="turbo-frame">
+    <%=
+      render partial: "stories/table/story_row",
+        collection: @flagged_stories,
+        as: :story,
+        locals: { current_user: current_user, stream_name: "flagged_stories" }
+    %>
+  </tbody>
+<table>

@@ -1,0 +1,31 @@
+<div>
+  <%=
+    if user_signed_in?
+      button_to(
+        "Log Out",
+        destroy_user_session_path,
+        method: :delete,
+        form: { 'data-turbo' => "false" }
+      )
+    end %>
+  </div>
+
+
+<h1>
+  Top News
+</h1>
+
+<nav>
+  <% if user_signed_in? %>
+    <%= link_to "Current Top Stories", root_path %>
+    <%= link_to "Flagged Stories", flagged_stories_path %>
+  <% end %>
+</nav>
+
+<p class="notice">
+  <%= notice %>
+</p>
+
+<p class="alert">
+  <%= alert %>
+</p>

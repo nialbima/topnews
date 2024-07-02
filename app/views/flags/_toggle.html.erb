@@ -1,0 +1,9 @@
+<%=
+  button_to flag_path, params: {story_id: story.id} do
+    if story.flagged?
+      "I'm flagged, click me to remove your flag"
+    else
+      "I'm not flagged, click to flag me"
+    end
+  end
+%>
