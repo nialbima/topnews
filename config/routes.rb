@@ -1,4 +1,4 @@
-require 'sidekiq/web'
+require "sidekiq/web"
 
 Rails.application.routes.draw do
   mount Sidekiq::Web => "/sidekiq"
@@ -10,5 +10,4 @@ Rails.application.routes.draw do
   post "/flag", to: "flags#toggle"
 
   root to: "stories#index"
-
 end

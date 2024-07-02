@@ -14,7 +14,7 @@ Rails.application.configure do
 
   if ENV.fetch("REDIS_CACHING_ENABLED", true)
     config.action_controller.perform_caching = true
-    config.cache_store = :redis_cache_store, { url: ENV.fetch("REDIS_URL") }
+    config.cache_store = :redis_cache_store, {url: ENV.fetch("REDIS_URL")}
   elsif Rails.root.join("tmp/caching-dev.txt").exist?
     config.action_controller.perform_caching = true
 
